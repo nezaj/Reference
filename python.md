@@ -176,3 +176,169 @@ If there's only one item in the sequence, its value is returned; if the sequence
 >>> reduce(add, range(1, 11), 10)
 65
 ```
+
+### List Comprehensions
+List comprehensions provide a concise way to create lists. A list comprehension consists of brackets contianing an expression followed by a for clause, then zero or more for or if clauses. The result will be a new list result from evaluating the expression in the context of the for and if clauses which follow it. Here is a list comprehension to flatten an array:
+```
+>>> arr = [range(1, 2), range(3, 5), range(10, 12)]
+>>> arr
+[[1], [3, 4], [10, 11]]
+>>> [num for elem in arr for num in elem]
+[1, 3, 4, 10, 11]
+```
+Rhis is equivalent to:
+```
+>>> flatten = []
+>>> for elem in arr:
+...     for num in elem:
+...         flatten.append(num)
+...
+>>> flatten
+[1, 3, 4, 10, 11]
+```
+
+### Nested List Comprehensions
+The initial expression in a list comprehension can be any arbitrary expression, including another list comprehension. Consider the following example of a 3x4 matrix implemented as a list of 3 lists of length 4:
+```
+>>> matrix = [
+...     [1, 2, 3, 4],
+...     [5, 6, 7, 8],
+...     [9, 10, 11, 12],
+... ]
+```
+The following list comprehension will transpose rows and columns:
+```
+>>> [[row[i] for row in matrix] for i in range(4)]
+[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+```
+Remember, the nested listcomp is evaluated in the context of the for that follows it. Thus this is equivalent to the following:
+```
+>>> transposed = []
+>>> for i in range(4):
+...     transpose.append([row[i] for row in matrix])
+...
+>>> transposed
+```
+Which is also equivalent to the following:
+```
+>>> transposed = []
+>>> for i in range(4):
+...     new_row = []
+...     for row in matrix:
+...         new_row.append(row[i])
+...     transposed.append(new_row)
+...
+>>> tranposed
+[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+```
+List comprehensions are nice :)
+
+### The del statement
+The way to remove an item from a list fiven its index of its value: the **del** statement. This is different from pop which returns a value. The **del** statement can also be used to remove slices from a list or clear the entire list (similar to assigning an empty slice to the slice). For example
+```
+>>> a = [-1, 1, 66.25, 333, 333, 1234.5] >>> del a[0]
+>>> a
+[1, 66.25, 333, 333, 1234.5]
+>>> del a[2:4]
+>>> a
+[1, 66.25, 1234.5] >>> del a[:]
+>>> a
+[]
+```
+del can also be used to delete entire variables:
+```
+>>> del a
+```
+
+### Dictionaries
+Dic comprehensions can be used to create dictionaries from aribitrary key and value expressions:
+```
+>>> {x: x**2 for x in (2, 4, 6)}
+{2: 4, 4: 16, 6: 36}
+```
+When the keys are simple strings, it is sometimes easier to specify pairs using keyword arguments:
+```
+>>> dict(sape=4139, guideo=4127, jack=4098)
+... {'sape': 4139, 'jack': 4098, 'guido': 4127}
+```
+
+### Enumerate
+```
+When looping through a sequence, the position index and corresponding value can be retrieved at the same time using the enumerate() function.
+>>> for i, v in enumerate([’tic’, ’tac’, ’toe’]):
+...     print i, v
+...
+0 tic
+1 tac
+2 toe
+```
+
+### Zip
+To loop over to or more sequences at the same time, the entries can be paired with the **zip()** function
+```
+>>> questions = [’name’, ’quest’, ’favorite color’]
+>>> answers = [’lancelot’, ’the holy grail’, ’blue’]
+>>> for q, a in zip(questions, answers):
+... print ’What is your {0}? It is {1}.’.format(q, a) ...
+What is your name?  It is lancelot.
+What is your quest?  It is the holy grail.
+What is your favorite color?  It is blue.
+```
+
+### iteritems
+When looping through dictionaries, the key and corresponding value can be retrieved at the same time using the iteritems() method.
+```
+>>> alpha_nums = {'a': 1, 'b': 2, 'c': 3}
+>>> for k, v in alpha_nums.iteritems():
+...     print k, v
+...
+a 1
+c 3
+b 2
+```
+
+### Boolean operators *and* and *or* are **short-circuit** operators
+Their arguments are evaluated from left to right, and evaluation stops as soon as the outcome is determined. It is possible to assign the result of a comparison or other Boolean expression to a variable. For example:
+```
+>>> string1, string2, string3 = '', 'Trondeim', 'Hammer Dance'
+>>> non_null = string1, or tring2, or string3
+>>> non_null
+'Trondheim'
+```
+
+Note that in Python, unlike C, assignment cannot occur inside expressions.
+
+### Comparing Sequences and Other Types
+Sequence objects may be compared to other objects with the same type. The comparison uses **lexicographical** ordering.
+
+### The Module Search Path
+When a modules named *spam* is imported, the interperter first searches for a built-in module with that name. If not found, it then search for a file named spam.py in a list of directories given by the variable *sys.path* which is initialized from these locations:
+* the directory containing the input script (or the current directory).
+* **PYHTHONPATH** (a list of directory names, with the same syntax ash the shell varialbe **PATH**).
+* the installation-dependent default.
+
+After initialization, Python programs can modify *sys.path.* The directory containing the script being run is placed at the beginning of the search path, ahead of the standard library path. This means that scripts in that directory will be loaded instead of modules from the standard library. This is an error unless the replacement was intended. Be aware.
+
+### sys.path.append()
+Use sys.path.append('directory') to add an additional search path for PYTHONPATH this is especially useful if you intend to import modules from a different directory. For example, suppose you want to import a module from the parent directory of the current file. You can do it like this:
+```
+import sys
+import os.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import module_name_in_parent_dir
+```
+
+### Packages
+Packages are a way of structuring Python's module namespace by using "dotted modules name." For example, the module name *A.B* designates a submodule named B in a package named A.
+
+When importing the package, Python searches through the directories on sys.path looking for the package subdirectory. The **\_\_init.py\_\_** files are required to make Python treat the directories as containing packages. The **\_\_init\_\_.py** can be just be an empty file, but it can also execute initialization code for the package.
+
+When using *from package import item* the item can be either a submodule (or subpackage) of the package, or some other name defined in the package, like a function, class or variable. The *import* statement first tests whether the item is defined in the package; if not, it assumes it is a module and attempts to load it. If it fails to find it, an **ImportError** exception is raised.
+
+The **\_\_all\_\_** variable can be used to define which submodules are imported when using *from package import **, if it is not defined than only the names defined in the package's **\_\_init\_\_.py** will be loaded
+
+### Intra-package References
+Submodules often need to refer to each other. When packages are structured into subpackages you can use absolute import to refer to submodules of sibilings packages. For example, if the modules *sound.filters.vocoder* needs to use the *echo* module in the *sound.effects* package, it can use *from sound.effects import echo*
+
+Note: Explicit and implicit relative imports are base on the name of the current module. Since the name of main module is always **\_\_modules\_\_**, modules intended for use as the main module of a Python application should always use absolute imports.
