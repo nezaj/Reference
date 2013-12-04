@@ -342,3 +342,35 @@ The **\_\_all\_\_** variable can be used to define which submodules are imported
 Submodules often need to refer to each other. When packages are structured into subpackages you can use absolute import to refer to submodules of sibilings packages. For example, if the modules *sound.filters.vocoder* needs to use the *echo* module in the *sound.effects* package, it can use *from sound.effects import echo*
 
 Note: Explicit and implicit relative imports are base on the name of the current module. Since the name of main module is always **\_\_modules\_\_**, modules intended for use as the main module of a Python application should always use absolute imports.
+
+### Opening Files
+It is good practice to use the *with* keyword when dealing with file objects. This has the advantage that the file is properly closed after its suite finishes, even if an exception is raised on the way. It is also much shorter than writing equivalent try-finally blocks:
+```
+>>> with open('workfile', 'r') as f:
+...     read_data = f.read()
+>>> f.closed
+True
+
+### Pickle
+The *pickle* module can take almost any Python object and convert it to a string representation. If you have an object x and a file object f that's been opened for writing, the simplest way to pickle the object takes only one line of code:
+```
+pickle.dump(x, f)
+```
+To unpickle the object again, if f is a file object which has been opened for reading:
+```
+x = pickle.load(f)
+```
+*pickle* is the standard way to make Python objects which can be stored and reused by other programs.
+
+### Error Output Redirection
+The *sys* module has attributes for stdin, stdout, and stderr. The latter is useful for emitting warning and error messages to make them visible even when stduout has been redirected (like when using nosetests)
+```
+>>> sys.stderr.write('Warning, log file not found starting a new one\n')
+Warning, log file not found starting a new one
+```
+
+### Weak References
+Python does automatic memory management (reference counting for most objects and garbage collection to eliminate cycles). The memory is freed shortly after the last reference to it has been eliminated.
+
+This approach works fine for most applications but occasionally there is a need to track objects only as long as they are being used by something else. Unfortunately, just tracking them creates a reference that makes them permanent. The *weakref* module provides tools for tracking objects without creating a reference. When the object is no longer needed, it is automatically removed from a weakref table and a callback is triggered for weakref objects. Typical applications including caching objects that expensive to create.
+
