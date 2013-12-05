@@ -1,4 +1,5 @@
 # Python Doc Notes
+Some notes on things I found particularly interesting in the py-docs. This doesn't include sections regarding the Standard Library.
 
 ### Python scripts can be made directly executable
 To do this add this line to the top of your script
@@ -350,6 +351,7 @@ It is good practice to use the *with* keyword when dealing with file objects. Th
 ...     read_data = f.read()
 >>> f.closed
 True
+```
 
 ### Pickle
 The *pickle* module can take almost any Python object and convert it to a string representation. If you have an object x and a file object f that's been opened for writing, the simplest way to pickle the object takes only one line of code:
