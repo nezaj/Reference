@@ -16,7 +16,6 @@ class Graph(dict):
     Adding an edge E to a Graph creates two near entries in the inner dictionary
     which both point to the same Edge.
     """
-
     def __init__(self, vs=[], es=[]):
         """
         Creates a new graph.
@@ -40,21 +39,58 @@ class Graph(dict):
         self[w][v] = e
 
     def add_vertex(self, v):
-        " Adds vertix to graph "
+        " Adds vertex to graph "
         self[v] = {}
 
+    def edges(self):
+        " Returns a list of edges in the graph "
+        edges = set()
+        for v in self.values():
+            edges.update(v.values())
+
+        return list(edges)
+
+    def get_edge(self, v, w):
+        " Takes two vertices and returns the edge between them if it exists "
+        try:
+            return self[v][w]
+        except KeyError:
+            return None
+
+    def out_edges(self, v):
+        " Returns a list of edges connected to the given vertex "
+        return self[v].values()
+
+    def out_vertices(self, v):
+        " Returns a list of of vertices with an edge to the given vertex "
+        return sorted(self[v].keys())
+
+    def remove_edge(self, e):
+        " Removes edge from graph by removing entries for both directions "
+        v, w = e
+        self[v][w] = None
+        self[w][v] = None
+
+    def vertices(self):
+        " Returns a sorted list of vertices in the graph. "
+        return sorted(self.keys())
+
 class Vertex(object):
-    " A Vertex is a node in a graph. "
+    " A node in a graph. "
     def __init__(self, label=''):
         self.label = label
 
     def __repr__(self):
         return "Vertex('{}')".format(self.label)
 
+    def __lt__(self, other):
+        " Vertices are sorted by label "
+        return self.label < other.label
+
     __str__ = __repr__
 
 class Edge(tuple):
-    " An Edge is a tuple of two vertices. "
+    " A tuple of two vertices. "
     def __new__(cls, e1, e2):
         return tuple.__new__(cls, (e1,e2))
 
@@ -62,3 +98,10 @@ class Edge(tuple):
         return 'Edge({}, {})'.format(repr(self[0]), repr(self[1]))
 
     __str__ = __repr__
+
+def mock_graph():
+    v = Vertex('v')
+    w = Vertex('w')
+    e = Edge(v, w)
+    g = Graph([v, w], [e])
+    return g
