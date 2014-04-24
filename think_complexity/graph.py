@@ -2,6 +2,8 @@
 Graph code from Chapter 2 of Think Complexity
 """
 
+import itertools
+
 class Graph(dict):
     """
     Implements an undirected graph as a dictionary of dictionaries.
@@ -28,6 +30,11 @@ class Graph(dict):
         for e in es:
             self.add_edge(e)
 
+    def add_all_edges(self):
+        " Makes a complete graph by adding edges to it "
+        for vertex_pair in itertools.combinations(self.vertices(), 2):
+            self.add_edge(Edge(*vertex_pair))
+
     def add_edge(self, e):
         """
         Adds edge to graph by adding entry for both directions.
@@ -43,12 +50,12 @@ class Graph(dict):
         self[v] = {}
 
     def edges(self):
-        " Returns a list of edges in the graph "
+        " Returns a sorted list of edges in the graph "
         edges = set()
         for v in self.values():
             edges.update(v.values())
 
-        return list(edges)
+        return sorted(list(edges))
 
     def get_edge(self, v, w):
         " Takes two vertices and returns the edge between them if it exists "
@@ -58,8 +65,8 @@ class Graph(dict):
             return None
 
     def out_edges(self, v):
-        " Returns a list of edges connected to the given vertex "
-        return self[v].values()
+        " Returns a sorted list of edges connected to the given vertex "
+        return sorted(self[v].values())
 
     def out_vertices(self, v):
         " Returns a list of of vertices with an edge to the given vertex "
@@ -84,7 +91,7 @@ class Vertex(object):
         return "Vertex('{}')".format(self.label)
 
     def __lt__(self, other):
-        " Vertices are sorted by label "
+        " Vertices are sorted lexicographically by label "
         return self.label < other.label
 
     __str__ = __repr__
@@ -96,6 +103,13 @@ class Edge(tuple):
 
     def __repr__(self):
         return 'Edge({}, {})'.format(repr(self[0]), repr(self[1]))
+
+    def __lt__(self, other):
+        " Edges are sorted lexicographically by vertex "
+        if self[0] == other[0]:
+            return self[1] < other[1]
+        else:
+            return self[0] < other[0]
 
     __str__ = __repr__
 

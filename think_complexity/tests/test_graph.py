@@ -88,3 +88,18 @@ class TestGraph(object):
 
         # New vertex is included
         eq_(g.out_vertices(v), [w, x])
+
+    def test_add_all_edges(self):
+        # Adds an edge to edge-less graph
+        v, w, e = self.v, self.w, self.e
+        g = Graph([v, w], [])
+        g.add_all_edges()
+        eq_(g.edges(), [e])
+
+        # Adds edges between all pairs of vertices in edge-less graph
+        x = Vertex('x')
+        e2 = Edge(v, x)
+        e3 = Edge(w, x)
+        g = Graph([v, w, x], [])
+        g.add_all_edges()
+        eq_(g.edges(), [e, e2, e3])
