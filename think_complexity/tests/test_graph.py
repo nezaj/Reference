@@ -1,6 +1,6 @@
-from nose.tools import eq_
+from nose.tools import eq_, assert_raises
 
-from graph import Graph, Vertex, Edge
+from graph import Graph, Vertex, Edge, GraphError
 
 
 class TestGraph(object):
@@ -103,3 +103,42 @@ class TestGraph(object):
         g = Graph([v, w, x], [])
         g.add_all_edges()
         eq_(g.edges(), [e, e2, e3])
+
+    def test_add_regular_edges(self):
+        # Adds an edge to edge-less graph
+        v, w, e = self.v, self.w, self.e
+        g = Graph([v, w], [])
+        g.add_regular_edges(1)
+        eq_(g.edges(), [e])
+
+        # Can make a regular graph of three vertices and degree 2
+        x = Vertex('x')
+        e2 = Edge(v, x)
+        e3 = Edge(w, x)
+        g = Graph([v, w, x], [])
+        g.add_regular_edges(2)
+        eq_(g.edges(), [e, e2, e3])
+
+        # Cannot make a regular graph of three vertices and degree 1
+        g = Graph([v, w, x], [])
+        assert_raises(GraphError, g.add_regular_edges, 1)
+
+        # Cannot make a regular graph of three vertices and degree 3
+        g = Graph([v, w, x], [])
+        assert_raises(GraphError, g.add_regular_edges, 3)
+
+        # Can make a regular graph of five vertices and even degree
+        y = Vertex('y')
+        z = Vertex('z')
+        g = Graph([v, w, x, y, z], [])
+        g.add_regular_edges(2)
+        eq_(g.num_edges(), 5)
+
+        # Can make a regular graph of 4 vertices and odd degree
+        g = Graph([v, w, x, y], [])
+        g.add_regular_edges(3)
+        eq_(g.num_edges(), 6)
+
+        # Cannot make a regular graph of five vertices and degree 3
+        g = Graph([v, w, x, y, z], [])
+        assert_raises(GraphError, g.add_regular_edges, 3)

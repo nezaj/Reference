@@ -36,7 +36,52 @@ class Graph(dict):
     def add_all_edges(self):
         " Makes a complete graph by adding edges to it "
         for vertex_pair in itertools.combinations(self.vertices(), 2):
-            self.add_edge(Edge(*vertex_pair))
+            if not self.get_edge(*vertex_pair):
+                self.add_edge(Edge(*vertex_pair))
+
+    def add_regular_edges(self, k):
+        """
+        Makes a regular graph with vertices of degree k.
+
+        A regular graph can be drawn if:
+        1) k <= n - 1
+        2) n * k is even
+
+        Algorithim: Let m be an integer. There are two cases to consider:
+        A) k = (2 * m)
+        --> Draw edges between a vertex and its m left/right neighbors
+
+        B) k = (2 * m)
+        --> Draw edges between vertex and its m left/right neighbors
+        --> Draw edges between vertex and the farthest vertex
+        """
+        n = self.num_vertices()
+        if k > (n - 1):
+            raise GraphError('Regular graph must have degree k <= n - 1')
+        if is_odd(k * n):
+            raise GraphError('Regular graph must have n * k be even')
+
+        vs = self.vertices()
+        m = int(math.floor(k/2))
+        for idx, v in enumerate(vs):
+            v_edges = len(self.out_edges(v))
+            if v_edges < k:
+                # Add edges between m left/right neighbors
+                # Process: Rotate the list so that the current vertex is first.
+                # Next slice off the first element and take m elements from the left and right
+                # Iterate through each vertex, neighbor pair and add an edge if it does not exist
+                rotate_vs = rotate_list(vs, idx)[1:]
+                l_vs = rotate_vs[::-1][:m]
+                r_vs = rotate_vs[:m]
+                for o in sorted(l_vs + r_vs):
+                    if not self.get_edge(v, o):
+                        self.add_edge(Edge(v, o))
+
+                # If odd degree add edges between opposite vertex
+                if is_odd(k):
+                    mid = (n - 1) / 2
+                    opp_vertex = rotate_vs[mid]
+                    self.add_edge(Edge(v, opp_vertex))
 
     def add_edge(self, e):
         """
@@ -92,6 +137,9 @@ class Graph(dict):
     def vertices(self):
         " Returns a sorted list of vertices in the graph. "
         return sorted(self.keys())
+
+class GraphError(Exception):
+    pass
 
 class Vertex(object):
     " A node in a graph. "
