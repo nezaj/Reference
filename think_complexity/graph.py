@@ -3,6 +3,9 @@ Graph code from Chapter 2 of Think Complexity
 """
 
 import itertools
+import math
+
+from util import rotate_list, is_even, is_odd
 
 class Graph(dict):
     """
@@ -63,6 +66,14 @@ class Graph(dict):
             return self[v][w]
         except KeyError:
             return None
+
+    def num_edges(self):
+        " Convienence method for number of edges in graph"
+        return len(self.edges())
+
+    def num_vertices(self):
+        " Convienence method for number of vertices in graph"
+        return len(self.vertices())
 
     def out_edges(self, v):
         " Returns a sorted list of edges connected to the given vertex "
