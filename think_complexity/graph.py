@@ -4,6 +4,7 @@ Graph code from Chapter 2 of Think Complexity
 
 import itertools
 import math
+from collections import deque
 
 from util import rotate_list, is_even, is_odd
 
@@ -76,7 +77,7 @@ class Graph(dict):
                     if not self.get_edge(v, o):
                         self.add_edge(Edge(v, o))
 
-                # If odd degree add edges between opposite vertex
+                # If odd degree add edge between opposite vertex
                 if is_odd(k):
                     mid = (n - 1) / 2
                     opp_vertex = rotate_vs[mid]
@@ -110,6 +111,28 @@ class Graph(dict):
             return self[v][w]
         except KeyError:
             return None
+
+    def is_connected(self):
+        """
+        Determine whether a graph is connected
+        Uses a BFS approach to explore nodes and checks whether the number
+        of seen nodes is equal to the total number of nodes in the graph
+        """
+        # Pick a starting node
+        v = self.vertices()[0]
+
+        seen = set()
+        vs_queue = deque([v])
+        while vs_queue:
+            node = vs_queue.popleft()
+            seen.add(node)
+            new_nodes = [n for n in self.out_vertices(node) if n not in seen]
+            vs_queue.extend(new_nodes)
+
+        if len(seen) == self.num_vertices():
+            return True
+        else:
+            return False
 
     def num_edges(self):
         " Convienence method for number of edges in graph"

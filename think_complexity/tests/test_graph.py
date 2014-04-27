@@ -142,3 +142,23 @@ class TestGraph(object):
         # Cannot make a regular graph of five vertices and degree 3
         g = Graph([v, w, x, y, z], [])
         assert_raises(GraphError, g.add_regular_edges, 3)
+
+    def test_is_connected(self):
+        # Returns False for an empty graph
+        v, w, e = self.v, self.w, self.e
+        g = Graph([v, w], [])
+        eq_(g.is_connected(), False)
+
+        # Returns True for a complete graph
+        g.add_all_edges()
+        eq_(g.is_connected(), True)
+
+        # Returns False when a new vertex is added
+        x = Vertex('x')
+        g.add_vertex(x)
+        eq_(g.is_connected(), False)
+
+        # Returns True when edge is added to connect it
+        e2 = Edge(w, x)
+        g.add_edge(e2)
+        eq_(g.is_connected(), True)
