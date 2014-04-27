@@ -36,8 +36,7 @@ class Graph(dict):
     def add_all_edges(self):
         " Makes a complete graph by adding edges to it "
         for vertex_pair in itertools.combinations(self.vertices(), 2):
-            if not self.get_edge(*vertex_pair):
-                self.add_edge(Edge(*vertex_pair))
+            self.add_edge(Edge(*vertex_pair))
 
     def add_regular_edges(self, k):
         """
