@@ -19,6 +19,7 @@ except ImportError:
     from swampy.Gui import Gui, GuiCanvas
 
 from graph import Vertex, Edge, Graph
+from random_graph import RandomGraph
 
 class GraphCanvas(GuiCanvas):
     """a GraphCanvas is a canvas that knows how to draw Vertices
@@ -189,9 +190,18 @@ def main(script, n='10', *args):
     labels = string.ascii_lowercase + string.ascii_uppercase
     vs = [Vertex(c) for c in labels[:n]]
 
-    # create a graph and a layout
-    g = Graph(vs)
-    g.add_all_edges()
+    # Create complete graph
+    # g = Graph(vs)
+    # g.add_all_edges()
+
+    # Create regular graph
+    # g = Graph(vs)
+    # g.add_regular_edges(4)
+
+    # Create random graph
+    g = RandomGraph(vs)
+    g.add_random_edges(0.5)
+
     layout = CircleLayout(g)
 
     # draw the graph
