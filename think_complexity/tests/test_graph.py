@@ -1,7 +1,6 @@
 from nose.tools import eq_, assert_raises
 
-from graph import Graph, Vertex, Edge, GraphError
-
+from graphs import Graph, Vertex, Edge, GraphError
 
 class TestGraph(object):
 

@@ -25,7 +25,7 @@ class RandomGraph(Graph):
 def sharp_threshold():
     """
     Generates statistics for connectedness of a random Erdos-Renyi graph.
-    Generates deltas between 0.0 and 1.0 in 0.1 increments
+    Uses deltas between 0.0 and 1.0 in 0.1 increments
     """
     delta = 0.2
     vs = [Vertex(v) for v in string.ascii_letters]
