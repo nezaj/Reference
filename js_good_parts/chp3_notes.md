@@ -1,6 +1,6 @@
-## Objects
+## Chapter 3: Objects
 
-#### Javascript Types
+#### JavaScript Types
 * numbers
 * strings
 * booleans (*true* and *false*)
@@ -15,7 +15,7 @@ An object is a container of properties, where a property has a name and a value.
 Objects in JavaScript are class-free. There is no constraint on the names of the new properties or on the values of properties. Objects are useful for collecting and organizing data. Objects can contain other objects, so they can easily represent tree or graph structures.
 
 #### Object Literals
-An object literal is a pair of curly braces surronding zero or more name/value pairs. An object literal can appear anywhere an expression can appear:
+An object literal is a pair of curly braces surrounding zero or more name/value pairs. An object literal can appear anywhere an expression can appear:
 ```javascript
 var empty_object = {}
 
@@ -33,7 +33,7 @@ Values can be retrieved from an object by wrapping a string expression in a [ ] 
 stooge["first-name"]    // "Joe"
 flight.departure.IATA   // "SYD"
 ```
-Attempt to retrieve values from *undefined* will throw a *TypeError* exception. This can be guared against with the && operator:
+Attempt to retrieve values from *undefined* will throw a *TypeError* exception. This can be guarded against with the && operator:
 ```javascript
 flight.equipment                            // undefined
 flight.equipment.model                      // throw "TypeError"
@@ -57,9 +57,9 @@ a = b = c = {};
 ```
 
 #### Enumeration
-The *for in* statement can loop over all of the property names in an object. The enumeration will include all of the properties -- including functions and prototype properties that you might not be interested in -- so it is neccesary to filter ou the values you don't want. The most common filters are the *hasOwnProperty* method and using *typeof* to exclude functions.
+The *for in* statement can loop over all of the property names in an object. The enumeration will include all of the properties -- including functions and prototype properties that you might not be interested in -- so it is necessary to filter out the values you don't want. The most common filters are the *hasOwnProperty* method and using *typeof* to exclude functions.
 
-There is no guarentee on the order of the names, so be prepared for the names to appear in any order. If you want to assure that the properties appear in a particular order, it is best to avoid the *for in* statement entirely and instead make an array consisting of the names of the properties in the correct order.
+There is no guarantee on the order of the names, so be prepared for the names to appear in any order. If you want to assure that the properties appear in a particular order, it is best to avoid the *for in* statement entirely and instead make an array consisting of the names of the properties in the correct order.
 ```javascript
 var i;
 var properties = [
@@ -75,7 +75,7 @@ for (i = 0; i < properties.length; i += 1) {
 ```
 
 #### Delete
-The *delete* operator can be used to remove a property from an object. It will remove a property from the object is has one. It will not touch any of the objects in the protype linkage. Removing a property from an object may allow a property from the protoype linkage to shine through:
+The *delete* operator can be used to remove a property from an object. It will remove a property from the object is has one. It will not touch any of the objects in the prototype linkage. Removing a property from an object may allow a property from the prototype linkage to shine through:
 ```javascript
 another_stooge.nickname     // 'Moe'
 
@@ -86,7 +86,7 @@ another_stookge.nickname    // 'Curly'
 ```
 
 #### Global Abatement
-JavaScript makes it easy to define global variables that can hold all of the assets of your application. Unfortunately, global variables weaken the resilency of programs and should be avoided.
+JavaScript makes it easy to define global variables that can hold all of the assets of your application. Unfortunately, global variables weaken the resiliency of programs and should be avoided.
 
 One way to minimize the use of global variables is to create a single global variable for your application:
 ```javascript
@@ -114,4 +114,4 @@ MYAPP.flight = {
        }
 };
 ```
-By reducing your global footprint to a single name, you significantly reduce the chance of bad interactions with other applications, widgets, or libraries. Your pro- gram also becomes easier to read because it is obvious that MYAPP.stooge refers to a top-level structure. In the next chapter, we will see ways to use closure for informa- tion hiding, which is another effective global abatement technique.
+By reducing your global footprint to a single name, you significantly reduce the chance of bad interactions with other applications, widgets, or libraries. Your pro- gram also becomes easier to read because it is obvious that MYAPP.stooge refers to a top-level structure. In the next chapter, we will see ways to use closure for information hiding, which is another effective global abatement technique.

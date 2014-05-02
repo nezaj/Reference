@@ -1,13 +1,13 @@
-# Heroku Commands for Rails projects
+## Heroku Commands for Rails projects
 
-### Add remote heroku repo
+#### Add remote heroku repo
     git remote add heroku git@heroku.com:your-project-name.git
 
-### Push to heroku
+#### Push to heroku
     git push heroku master
 
-### Open Heroku Console
+#### Open Heroku Console
     heroku run rails c
 
-### Migrate heroku db
+#### Migrate heroku db
     heroku run rake db:migrate

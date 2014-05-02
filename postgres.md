@@ -1,5 +1,6 @@
-### Start Server
+#### Start Server
     pg_ctl start
-### Stop Server
+
+#### Stop Server
     pg_ctl stop -m fast
 

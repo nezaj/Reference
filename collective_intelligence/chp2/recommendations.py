@@ -56,6 +56,7 @@ def sim_pearson(prefs, p1, p2):
     r = num/den
 
     return r
+
 def getRecommendations(prefs, person, similarity=sim_pearson):
     """
     Get recommendations for a person by using a weighted average

@@ -1,6 +1,7 @@
-# Collective Inteligence Notes
-Notes from Toby Segaran's Collective Intelligence
+## Programming Collective Intelligence
+A great book for going beyond CRUD. Useful if you want to make a recommendation service or dating website.
 
-* [Chapter Two][0]
+### Exercises and Notes
+* [Making Recommendations][chp2]
 
-[0]: https://github.com/nezaj/Reference/blob/master/collective_intelligence/chp2/chp2.md
+[chp2]: https://github.com/nezaj/Reference/blob/master/collective_intelligence/chp2

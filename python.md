@@ -1,5 +1,5 @@
 # Python Doc Notes
-Some notes on things I found particularly interesting in the py-docs. This doesn't include sections regarding the Standard Library.
+Some notes on things I found particularly interesting. This doesn't include sections regarding the Standard Library.
 
 ### Python scripts can be made directly executable
 To do this add this line to the top of your script
@@ -12,7 +12,7 @@ chmod u+x myscript.py
 ```
 
 ### Interactive Startup File
-By setting an enviornment variable named PYTHONSTARTUP to the name of the file containing startup-commands, you can have standard commands executed every time the interperter is started. This is similar to the .profile feature of the Unix Shells. If you want a file to use this start-commands as well use the following pattern
+By setting an environment variable named PYTHONSTARTUP to the name of the file containing startup-commands, you can have standard commands executed every time the interpreter is started. This is similar to the .profile feature of the Unix Shells. If you want a file to use this start-commands as well use the following pattern
 ```
 import os
 filename = os.enviorn.get('PYTHONSTARTUP')
@@ -21,7 +21,7 @@ if filename and os.path.isfile(filename):
 ```
 
 ### Python supports complex numbers
-Complex numbers are written with a suffix of j or J. Complex nubmers with a nonzero real componenet are written as (real +imagj) or can be created with te complex(real, imag) function
+Complex numbers are written with a suffix of j or J. Complex numbers with a nonzero real component are written as (real + imaginary) or can be created with the `complex(real, imag)` function
 ```
 >>> 1j * 1j
 (-1+0j)
@@ -32,7 +32,7 @@ Complex numbers are written with a suffix of j or J. Complex nubmers with a nonz
 ```
 
 ### _ Variable in Interactive Mode
-In python the last printed expression is assigned to the variable _. THis means that when you are using Python as a desk calculator, it is somewhat easier to conitnue calculations, for example
+In python the last printed expression is assigned to the variable `_`. This means that when you are using Python as a desk calculator, it is somewhat easier to continue calculations, for example
 ```
 >>> tax = 12.5 / 100
 >>> price = 100.50
@@ -52,7 +52,7 @@ round(_, 2)
 ```
 
 ### Python support multiple assignment
-Right-hand expressions ar evaluated first before assignment. Evaluation is done from left to right
+Right-hand expressions are evaluated first before assignment. Evaluation is done from left to right
 ```
 >>> a, b = 1, 2
 >>> a
@@ -79,7 +79,7 @@ Right-hand expressions ar evaluated first before assignment. Evaluation is done 
 The execution of a function introduces a new symbol table used for the local variables of the function. More precisely, all variable assignments in a function store the value in the local symbol table; whereas variable references first look in the local symbol table, then in the local symbol tables of enclosing functions, then in the global symbol table, and finally in the table of built-in names. Thus, global variables cannot be directly assigned a value within a function (unless named in a global statement), although they may be referenced.
 
 ### Default argument values
-Default values for a paramter is evaluated only once. This makes a difference when the default is a mutable object such as a list, dictionary, or instances of most classes. For example, the following function accumulates the arguments passed to it on subsequent calls
+Default values for a parameter is evaluated only once. This makes a difference when the default is a mutable object such as a list, dictionary, or instances of most classes. For example, the following function accumulates the arguments passed to it on subsequent calls
 ```
 def f(a, L=[]):
     L.append(a)
@@ -106,7 +106,7 @@ def f(a, L=None):
 ```
 
 ### Lambda Expressions
-Small anonymous functions can be created with the lambda keyword. Lambda functions can be used wherever function objects are required. They are syntactically restricted to a single expression. THey are just syntactic sugar for a normal function definition. Like nested function definitions, lambda functions can reference variables from the containing scope
+Small anonymous functions can be created with the lambda keyword. Lambda functions can be used wherever function objects are required. They are syntactically restricted to a single expression. They are just syntactic sugar for a normal function definition. Like nested function definitions, lambda functions can reference variables from the containing scope
 ```
 >>> def make_incrementor(n):
 ...     return lambda x: x + n
@@ -132,14 +132,14 @@ The above example uses a lambda expression to return a function. Another use is 
 * Use blank lines to separate functions and classes,
   and larger blocks of code inside functions
 * When possible, put comments on a line of their own
-* Use docstrings
+* Use doc-strings
 * Use spaces around operators and after commas, but not directly inside
   bracket constructs: a = f(1, 2), b = g(3, 4)
 * Names your classes and functions consistently;
   **CamelCase** for classes
   **snake_case** for functions and methods
 * Always use self as the name for first method argument
-* Use plain ASCII when working in international enviornments
+* Use plain ASCII when working in international environments
 
 ### Functional Programming Tools
 There are three built-in functions that are very useful when used with lists: **filter()**, **map()**, and **reduce()**
@@ -158,7 +158,7 @@ There are three built-in functions that are very useful when used with lists: **
 [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
 ```
 
-More than one sequence may be passed to map; the function then must have as many arguments as there are sequences and is called with the corresponding item from each sequence (or None if some sequence is shorter thana nother). For example:
+More than one sequence may be passed to map; the function then must have as many arguments as there are sequences and is called with the corresponding item from each sequence (or None if some sequence is shorter than another). For example:
 ```
 >>> seq = range(8)
 >>> add = lambda x, y: x + y
@@ -229,7 +229,7 @@ Which is also equivalent to the following:
 ...         new_row.append(row[i])
 ...     transposed.append(new_row)
 ...
->>> tranposed
+>>> transposed
 [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 ```
 List comprehensions are nice :)
@@ -340,7 +340,7 @@ When using *from package import item* the item can be either a submodule (or sub
 The **\_\_all\_\_** variable can be used to define which submodules are imported when using *from package import **, if it is not defined than only the names defined in the package's **\_\_init\_\_.py** will be loaded
 
 ### Intra-package References
-Submodules often need to refer to each other. When packages are structured into subpackages you can use absolute import to refer to submodules of sibilings packages. For example, if the modules *sound.filters.vocoder* needs to use the *echo* module in the *sound.effects* package, it can use *from sound.effects import echo*
+Submodules often need to refer to each other. When packages are structured into sub-packages you can use absolute import to refer to submodules of sibling packages. For example, if the modules *sound.filters.vocoder* needs to use the *echo* module in the *sound.effects* package, it can use *from sound.effects import echo*
 
 Note: Explicit and implicit relative imports are base on the name of the current module. Since the name of main module is always **\_\_modules\_\_**, modules intended for use as the main module of a Python application should always use absolute imports.
 
@@ -375,4 +375,3 @@ Warning, log file not found starting a new one
 Python does automatic memory management (reference counting for most objects and garbage collection to eliminate cycles). The memory is freed shortly after the last reference to it has been eliminated.
 
 This approach works fine for most applications but occasionally there is a need to track objects only as long as they are being used by something else. Unfortunately, just tracking them creates a reference that makes them permanent. The *weakref* module provides tools for tracking objects without creating a reference. When the object is no longer needed, it is automatically removed from a weakref table and a callback is triggered for weakref objects. Typical applications including caching objects that expensive to create.
-

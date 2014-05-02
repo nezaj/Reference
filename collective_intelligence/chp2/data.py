@@ -51,5 +51,3 @@ critics = {
         'You, Me and Dupree': 1.0
     },
 }
-
-

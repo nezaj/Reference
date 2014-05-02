@@ -3,7 +3,7 @@ Useful helper functions
 """
 
 def rotate_list(l, n):
-    " Rotate a list n units to to the right "
+    " Rotate a list n units to the right "
     return l[n:] + l[:n]
 
 def is_even(n):
