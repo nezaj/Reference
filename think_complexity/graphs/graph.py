@@ -12,8 +12,8 @@ class Graph(dict):
     """
     Implements an undirected graph as a dictionary of dictionaries.
 
-    Graph is a dictionary that maps from a vertix V to an inner dictionary
-    that maps from a vertix W to an Edge that connect V and W.
+    Graph is a dictionary that maps from a vertex V to an inner dictionary
+    that maps from a vertex W to an Edge that connect V and W.
 
     Suppose g is a graph, g[v][w] maps to an Edge if there is one or raises
     a KeyError if there is not one.
@@ -51,7 +51,7 @@ class Graph(dict):
         A) k = (2 * m)
         --> Draw edges between a vertex and its m left/right neighbors
 
-        B) k = (2 * m)
+        B) k = (2 * m) + 1
         --> Draw edges between vertex and its m left/right neighbors
         --> Draw edges between vertex and the farthest vertex
         """
@@ -81,7 +81,8 @@ class Graph(dict):
                 if is_odd(k):
                     mid = (n - 1) / 2
                     opp_vertex = rotate_vs[mid]
-                    self.add_edge(Edge(v, opp_vertex))
+                    if not self.get_edge(v, opp_vertex):
+                        self.add_edge(Edge(v, opp_vertex))
 
     def add_edge(self, e):
         """
@@ -98,7 +99,7 @@ class Graph(dict):
         self[v] = {}
 
     def edges(self):
-        " Returns a sorted list of edges in the graph "
+        " Returns a sorted list of unique edges in the graph "
         edges = set()
         for v in self.values():
             edges.update(v.values())
@@ -114,7 +115,8 @@ class Graph(dict):
 
     def is_connected(self):
         """
-        Determine whether a graph is connected
+        Determines whether a graph is connected.
+
         Uses a BFS approach to explore nodes and checks whether the number
         of seen nodes is equal to the total number of nodes in the graph
         """
@@ -147,11 +149,11 @@ class Graph(dict):
         return sorted(self[v].values())
 
     def out_vertices(self, v):
-        " Returns a list of of vertices with an edge to the given vertex "
+        " Returns a list of vertices with an edge to the given vertex "
         return sorted(self[v].keys())
 
     def remove_edge(self, e):
-        " Removes edge from graph by removing entries for both directions "
+        " Removes edge from graph by removing entries in both directions "
         v, w = e
         self[v][w] = None
         self[w][v] = None
