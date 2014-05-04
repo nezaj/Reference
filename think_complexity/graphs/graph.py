@@ -131,10 +131,7 @@ class Graph(dict):
             new_nodes = [n for n in self.out_vertices(node) if n not in seen]
             vs_queue.extend(new_nodes)
 
-        if len(seen) == self.num_vertices():
-            return True
-        else:
-            return False
+        return True if len(seen) == self.num_vertices() else False
 
     def num_edges(self):
         " Convienence method for number of edges in graph"
