@@ -1,19 +1,17 @@
+"""
+Binary search thanks to bisect module
+https://docs.python.org/2/library/bisect.html#searching-sorted-lists
+"""
 
-def bisection(l, t, shift=0):
+import bisect
+
+def bisection(l, t):
     """
-    Uses binary search to find index of target in a list.
+    Finds index of target in a list. Returns None if not found.
     Note: Assumes list is already sorted
     """
-    lo = 0
-    hi = len(l)
-
-    while lo < hi:
-        mid = (lo + hi) / 2
-        if t == l[mid]:
-            return mid
-        elif t < l[mid]:
-            hi = mid
-        else:
-            lo = mid + 1
+    i = bisect.bisect_left(l, t)
+    if i != len(l) and l[i] == t:
+        return i
 
     return None
