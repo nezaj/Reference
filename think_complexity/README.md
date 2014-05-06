@@ -16,7 +16,7 @@ sudo pip install virtualenvwrapper
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
-Once you have cloned this repo and installed the packages above, use the Makefile to create a virtualenv to hold this project's dependencies. By default then virtualenv will be located in `~/.virtualenvs/think-complexity`. Activate the environment once setup is complete.
+Once you have cloned this repo and installed the packages above, use the Makefile to create a virtualenv to hold this project's dependencies. By default the virtualenv will be located in `~/.virtualenvs/think-complexity`. Activate the environment once setup is complete.
 ```
 make virtualenv
 workon think-complexity

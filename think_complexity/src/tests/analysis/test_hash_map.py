@@ -1,4 +1,4 @@
-# pylint complains about nose's hacky import
+# pylint complains about nose's hacky import of assert_raises
 # pylint: disable=E0611
 
 import string
