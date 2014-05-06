@@ -1,4 +1,4 @@
-## Chapter 2
+## Chapter 2: Graphs
 ### Exercise 2.1
 ```
 1. What is a simple graph? In the rest of this section, we will be assuming that all graphs are simple graphs. This is a common assumption for many graph algorithms—so common it is often unstated.

@@ -1,4 +1,4 @@
-## Chapter 3
+## Chapter 3: Analysis of Algorithms
 ### Exercise 3.1
 ```
 1. What is the order of growth of n^3 + n^2? What about 1000000n^3 + n^2? What about n^3 + 1000000n^2?
@@ -20,7 +20,7 @@ It is also in O(g)
 ```
 It is also in O(g)
 
-``
+```
 5. If f1 is in O(g) and f2 is in O(h), what can we say about f1 + f2?
 ```
 f1 + f2 is in max(O(g), O(h))
