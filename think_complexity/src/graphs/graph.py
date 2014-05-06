@@ -1,3 +1,6 @@
+# Inheriting from dict, no need to use __init__
+# pylint: disable=W0231
+
 """
 Graph code from Chapter 2 of Think Complexity
 """
@@ -6,7 +9,7 @@ import itertools
 import math
 from collections import deque
 
-from util import rotate_list, is_even, is_odd
+from util import rotate_list, is_odd
 
 class Graph(dict):
     """
@@ -62,7 +65,7 @@ class Graph(dict):
             raise GraphError('Regular graph must have n * k be even')
 
         vs = self.vertices()
-        m = int(math.floor(k/2))
+        m = int(math.floor(k / 2))
         for idx, v in enumerate(vs):
             v_edges = len(self.out_edges(v))
             if v_edges < k:
@@ -179,7 +182,7 @@ class Vertex(object):
 class Edge(tuple):
     " A tuple of two vertices. "
     def __new__(cls, e1, e2):
-        return tuple.__new__(cls, (e1,e2))
+        return tuple.__new__(cls, (e1, e2))
 
     def __repr__(self):
         return 'Edge({}, {})'.format(repr(self[0]), repr(self[1]))

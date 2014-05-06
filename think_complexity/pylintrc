@@ -26,13 +26,16 @@ persistent=no
 
 # C0111: Missing module docstring -- complains too much (e.g. empty "__init__.py")
 # I0011: Locally disabling -- I disabled for a reason
+# I0013: Disabling all warnings -- ditto
 # R0903: Too few public methods -- we have ORMish row type classes
 # R0904: Too many public methods -- I can't control library classes
+# W0102: Dangerous default value [] -- I think it's okay
 # W0142: Used * or ** magic -- "magic" covers a lot of ordinary uses
+# W0201: Attribute defined outside __init__ -- This doesn't play nice with nose test fixtures
 # W0511: TODO/FIXME/XXX -- I think it is reasonable to include these and get to them later
 # W0621: Redifining name from outer scope -- Not neccesarily bad style
 
-disable=C0111,I0011,R0903,R0904,W0142,W0511,W0621
+disable=C0111,I0011,I0013,R0903,R0904,W0102,W0142,W0201,W0511,W0621
 
 
 [REPORTS]

@@ -1,3 +1,5 @@
+# Most of this wasn't written by me, want to leave as is
+# pylint: skip-file
 """ Code example from Complexity and Computation, a book about
 exploring complexity science with Python.  Available free from
 

@@ -13,4 +13,3 @@ def is_even(n):
 def is_odd(n):
     " Returns whether a number is odd "
     return not is_even(n)
-

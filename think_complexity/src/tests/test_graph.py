@@ -1,16 +1,19 @@
+# pylint complains about nose's hacky import
+# pylint: disable=E0611
+
 from nose.tools import eq_, assert_raises
 
 from graphs import Graph, Vertex, Edge, GraphError
 
 class TestGraph(object):
 
-    def setUp(self):
+    def setup(self):
         self.v = Vertex('v')
         self.w = Vertex('w')
         self.e = Edge(self.v, self.w)
         self.g = Graph([self.v, self.w], [self.e])
 
-    def tearDown(self):
+    def teardown(self):
         pass
 
     def test_get_edge(self):
@@ -36,7 +39,7 @@ class TestGraph(object):
 
     def test_vertices(self):
         # Returns a list of vertices in the graph
-        v, w, e, g = self.v, self.w, self.e, self.g
+        v, w, g = self.v, self.w, self.g
         eq_(g.vertices(), [v, w])
 
         # Returns an updated
@@ -46,7 +49,7 @@ class TestGraph(object):
 
     def test_edges(self):
         # Returns a list of edges in the graph
-        v, w, e, g = self.v, self.w, self.e, self.g
+        v, e, g = self.v, self.e, self.g
         eq_(g.edges(), [e])
 
         # Add a new vertex and edge
@@ -76,7 +79,7 @@ class TestGraph(object):
 
     def test_out_vertices(self):
         # Returns a list of adjacent vertices in the graph
-        v, w, e, g = self.v, self.w, self.e, self.g
+        v, w, g = self.v, self.w, self.g
         eq_(g.out_vertices(v), [w])
 
         # Add a new vertex and edge
@@ -144,7 +147,7 @@ class TestGraph(object):
 
     def test_is_connected(self):
         # Returns False for an empty graph
-        v, w, e = self.v, self.w, self.e
+        v, w = self.v, self.w
         g = Graph([v, w], [])
         eq_(g.is_connected(), False)
 

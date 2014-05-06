@@ -1,4 +1,3 @@
-
 class LinearMap(object):
     " Simple map implementation. Defines add and get operations with constant and linear time respectively "
     def __init__(self):
@@ -17,7 +16,7 @@ class BetterMap(object):
     " Improvement over LinearMap. Uses multiple LinearMaps to store keys to reduce linear lookup time of get"
     def __init__(self, n=100):
         self.maps = []
-        for i in xrange(n):
+        for _ in xrange(n):
             self.maps.append(LinearMap())
 
     def get_map(self, k):

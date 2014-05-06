@@ -8,7 +8,7 @@ import math
 import string
 from collections import defaultdict
 
-from graph import Graph, Vertex, Edge, GraphError
+from graphs import Graph, Vertex, Edge, GraphError
 
 class RandomGraph(Graph):
 
@@ -37,7 +37,7 @@ def sharp_threshold():
         for n in xrange(1, len(vs)):
             random_vs = vs[:n]
 
-            low_p  = (1 - delta) * (math.log(n) / n)
+            low_p = (1 - delta) * (math.log(n) / n)
             g = RandomGraph(random_vs, [])
             g.add_random_edges(low_p)
             if g.is_connected():

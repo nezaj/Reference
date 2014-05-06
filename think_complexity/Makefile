@@ -20,10 +20,9 @@ virtualenv:
 pylint:
 	@echo "Running pylint..."
 	$(VENV_ACTIVATE) && \
-	PYTHONPATH=src && \
-	pylint src/graphs && \
+	PYTHONPATH=src pylint src/graphs && \
 	pylint src/analysis && \
-	pylint src/tests && \
+	PYTHONPATH=src pylint src/tests && \
 	pylint src/*.py
 
 pep8:
