@@ -25,4 +25,3 @@ class TestHashMap(object):
 
     def test_iteritems(self):
         m = self.h.maps.iteritems()
-        import pdb; pdb.set_trace()
